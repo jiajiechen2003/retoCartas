@@ -41,24 +41,20 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+                        
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
@@ -66,8 +62,7 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
@@ -79,24 +74,21 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1990.</p>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
@@ -104,8 +96,7 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
@@ -117,24 +108,21 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1990.</p>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
@@ -142,8 +130,7 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+                        
                     </div>
                 </div>
             </div>
@@ -155,24 +142,21 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+
                     </div>
                 </div>
             </div>
@@ -180,8 +164,7 @@
             <div class="col-lg-3">
                 <div class="card" id="carta">
                     <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <p class="card-text">One Piece is a card game developed by <NAME> in 1991.</p>
+                        
                     </div>
                 </div>
             </div>
