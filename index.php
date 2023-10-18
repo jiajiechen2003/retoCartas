@@ -47,7 +47,7 @@
                     <div class="leader-card-stats">
                         <div class="leader-power">
                             <h3>5000</h3>
-                            <img src="img/rangedLogo.PNG" id="ranged">
+                            <img src="img/specialLogo.PNG" id="special">
                         </div>
                     </div>
                     <div class="leader-img">
@@ -75,7 +75,7 @@
                     <div class="leader-card-stats">
                         <div class="leader-power">
                             <h3>5000</h3>
-                            <img src="img/strikeLogo.PNG" id="slash">
+                            <img src="img/rangedLogo.PNG" id="ranged">
                         </div>
                     </div>
                     <div class="leader-img">
@@ -89,7 +89,7 @@
                     <div class="leader-card-stats">
                         <div class="leader-power">
                             <h3>5000</h3>
-                            <img src="img/slashLogo.PNG" id="slash">
+                            <img src="img/strikeLogo.PNG" id="strike">
                         </div>
                     </div>
                     <div class="leader-img">
@@ -105,13 +105,13 @@
         <div class="row">
             <div class="col-xl-3 col-md-5">
                 <div class="card" id="carta">
-                    <div class="leader-card-stats">
-                        <div class="leader-power">
+                    <div class="character-card-stats">
+                        <div class="character-power">
                             <h3>5000</h3>
-                            <img src="img/rangedLogo.PNG" id="ranged">
+                            <img src="img/wisdomLogo.PNG" id="wisdom">
                         </div>
                     </div>
-                    <div class="leader-img">
+                    <div class="character-img">
                         <img src="img/hancock.webp">
                     </div>
                 </div>
@@ -119,14 +119,87 @@
 
             <div class="col-xl-3 col-md-5">
                 <div class="card" id="carta">
-                    <div class="leader-card-stats">
-                        <div class="leader-power">
+                    <div class="character-card-stats">
+                        <div class="character-power">
                             <h3>5000</h3>
                             <img src="img/slashLogo.PNG" id="slash">
                         </div>
                     </div>
+                    <div class="character-img">
+                        <img src="img/robinChwan.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="character-card-stats">
+                        <div class="character-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="strike">
+                        </div>
+                    </div>
+                    <div class="character-img">
+                        <img src="img/namiSwan.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="character-card-stats">
+                        <div class="character-power">
+                            <h3>5000</h3>
+                            <img src="img/slashLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="character-img">
+                        <img src="img/bonney.jpeg">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-md mt-4">
+        <div class="row">
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
                     <div class="leader-img">
-                        <img src="img/nicoRobin.jpg">
+                        <img src="img/shanksLeader.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="leader-img">
+                        <img src="img/barbablancaLeader.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="leader-img">
+                        <img src="img/rogerLeader.jpg">
                     </div>
                 </div>
             </div>
@@ -140,7 +213,25 @@
                         </div>
                     </div>
                     <div class="leader-img">
-                        <img src="img/namiSwan.jpg">
+                        <img src="img/garpLeader.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-md mt-4">
+        <div class="row">
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="leader-img">
+                        <img src="img/barbanegraLeader.jpg">
                     </div>
                 </div>
             </div>
@@ -150,46 +241,39 @@
                     <div class="leader-card-stats">
                         <div class="leader-power">
                             <h3>5000</h3>
-                            <img src="img/slashLogo.PNG" id="slash">
+                            <img src="img/strikeLogo.PNG" id="slash">
                         </div>
                     </div>
                     <div class="leader-img">
-                        <img src="img/bonney.jpeg">
+                        <img src="img/kaidoLeader.jpg">
                     </div>
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <div class="container-md mt-4">
-        <div class="row">
-            <div class="col-lg-3">
+            <div class="col-xl-3 col-md-5">
                 <div class="card" id="carta">
-                    <div class="card-body">
-
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card" id="carta">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card" id="carta">
-                    <div class="card-body">
-
+                    <div class="leader-img">
+                        <img src="img/akainuLeader.jpg">
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-xl-3 col-md-5">
                 <div class="card" id="carta">
-                    <div class="card-body">
-
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="leader-img">
+                        <img src="img/bigmomLeader.jpg">
                     </div>
                 </div>
             </div>
@@ -198,32 +282,58 @@
 
     <div class="container-md mt-4">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-xl-3 col-md-5">
                 <div class="card" id="carta">
-                    <div class="card-body">
-
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card" id="carta">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card" id="carta">
-                    <div class="card-body">
-
+                    <div class="leader-img">
+                        <img src="img/marinefordStage.jpg">
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-xl-3 col-md-5">
                 <div class="card" id="carta">
-                    <div class="card-body">
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="leader-img">
+                        <img src="img/skypieaStage.jpg">
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="leader-img">
+                        <img src="img/skypieaStage.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-5">
+                <div class="card" id="carta">
+                    <div class="leader-card-stats">
+                        <div class="leader-power">
+                            <h3>5000</h3>
+                            <img src="img/strikeLogo.PNG" id="slash">
+                        </div>
+                    </div>
+                    <div class="leader-img">
+                        <img src="img/bigmomLeader.jpg">
                     </div>
                 </div>
             </div>
