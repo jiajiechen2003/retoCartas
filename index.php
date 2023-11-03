@@ -1,3 +1,8 @@
+<?php
+require_once("cardsDB.php");
+$cards = selectCards();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -27,13 +32,21 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="addCards.php">ADD CARD</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">
+                                ADD NEW CARD
+                            </button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="modifyCards.php">MODIFY CARD</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modify">
+                                MODIFY CARD
+                            </button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="deleteCards.php">DELETE CARD</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#delete">
+                                DELETE CARD
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -41,8 +54,120 @@
         </nav>
     </header>
 
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add a new card</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="index.php" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Monkey D. Luffy"
+                                required>
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="power" name="power" placeholder="5000"
+                                min="1000" step="1000" required>
+                            <label for="power">Power</label>
+                        </div>
+
+                        <select class="form-select form-select-lg mb-3" aria-label="Large select example" required>
+                            <option selected>Choose an attribute</option>
+                            <option value="1">Ranged</option>
+                            <option value="2">Slash</option>
+                            <option value="3">Special</option>
+                            <option value="4">Strike</option>
+                            <option value="5">Wisdom</option>
+                        </select>
+
+                        <select class="form-select form-select-lg mb-3" aria-label="Large select example" required>
+                            <option selected>Choose card type</option>
+                            <option value="1">Character</option>
+                            <option value="2">Leader</option>
+                        </select>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="group" name="group" placeholder="Straw Hat Crew"
+                                required>
+                            <label for="name">Crew/Navy/Group</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="group2" name="group2"
+                                placeholder="Straw Hat Crew" required>
+                            <label for="name">Secondary Crew/Navy/Group</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Select an Image</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="cards">
-        <div class="card" id="carta">
+        <?php foreach ($cards as $card) { ?>
+            <?php $attribute = selectAttribute($card['id_carta']); 
+                $attributeImage = selectAttributeImage($card['id_carta']); 
+                $type = selectType($card['id_carta']);
+                $group = selectGroup($card['id_carta']);
+                $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+                ?>
+            <div class="card">
+                <div class="leader-card-stats">
+                    <div class="leader-power">
+                        <h2>
+                            <?php echo $card['nombre'] ?>
+                        </h2>
+                        <h3>
+                            <?php echo $card['poder'] ?>
+                        </h3>
+                        <img src="<?php foreach ($attributeImage as $image) {
+                            echo $image['imagen'];
+                        } ?>" 
+                        
+                        id="<?php foreach ($attribute as $value) {
+                               echo $value['atributo'];
+                           } ?>">
+                    </div>
+                </div>
+                <div class="leader-img">
+                    <img src="<?php echo $card['imagen'] ?>">
+                </div>
+                <div class="card-text">
+                    <div class="card-type">
+                        <h4>
+                            <?php foreach ($type as $tipo){
+                                echo $tipo['tipo'];   
+                            }?>
+                        </h4>
+                    </div>
+                    <div class="card-crew">
+                        <h4>
+                            <?php
+                            if (isset($card['grupo_secundario'])) {
+                                echo $card['grupo'] . "/" . $card['grupo_secundario'];
+                            } else {
+                                echo $card['grupo'];
+                            }
+                            ?>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+        <!-- <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Monkey D. Luffy</h2>
@@ -58,11 +183,11 @@
                     <h4>Leader</h4>
                 </div>
                 <div class="card-crew">
-                    <h4>Straw Hat Crew</h4>
+                    <h4>Straw Hat Crew/Worst Generation</h4>
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+            <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Roronoa Zoro</h2>
@@ -78,11 +203,11 @@
                     <h4>Leader</h4>
                 </div>
                 <div class="card-crew">
-                    <h4>Straw Hat Crew</h4>
+                    <h4>Straw Hat Crew/Worst Generation</h4>
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Sanji</h2>
@@ -102,7 +227,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Trafalgar Law</h2>
@@ -118,11 +243,11 @@
                     <h4>Leader</h4>
                 </div>
                 <div class="card-crew">
-                    <h4>Heart Pirates</h4>
+                    <h4>Heart Pirates/Worst Generation</h4>
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="character-card-stats">
                 <div class="character-power">
                     <h2>Boa Hancock</h2>
@@ -142,7 +267,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="character-card-stats">
                 <div class="character-power">
                     <h2>Robin-Chwan</h2>
@@ -162,7 +287,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="character-card-stats">
                 <div class="character-power">
                     <h2>Nami-Swan</h2>
@@ -182,7 +307,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="character-card-stats">
                 <div class="character-power">
                     <h2>Jewelry Bonney</h2>
@@ -198,11 +323,11 @@
                     <h4>Character</h4>
                 </div>
                 <div class="card-crew">
-                    <h4>Bonney Pirates</h4>
+                    <h4>Bonney Pirates/Worst Generation</h4>
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Shanks</h2>
@@ -222,7 +347,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Edward Newgate</h2>
@@ -242,7 +367,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Gol D. Roger</h2>
@@ -262,7 +387,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Monkey D. Garp</h2>
@@ -282,12 +407,12 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Marshal D. Teach</h2>
                     <h3>6000</h3>
-                    <img src="img/strikeLogo.PNG" id="strike">
+                    <img src="img/specialLogo.PNG" id="special">
                 </div>
             </div>
             <div class="leader-img">
@@ -298,11 +423,11 @@
                     <h4>Leader</h4>
                 </div>
                 <div class="card-crew">
-                    <h4>Blackbeard Pirates</h4>
+                    <h4>Four Emperors/Blackbeard Pirates</h4>
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Kaido</h2>
@@ -318,11 +443,11 @@
                     <h4>Leader</h4>
                 </div>
                 <div class="card-crew">
-                    <h4>Animal Kingdom Pirates</h4>
+                    <h4>Four Emperors/Beast Pirates</h4>
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Akainu</h2>
@@ -342,7 +467,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" id="carta">
+        <div class="card">
             <div class="leader-card-stats">
                 <div class="leader-power">
                     <h2>Big Mom</h2>
@@ -362,8 +487,43 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
+        <div class="modal fade" id="modify" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>

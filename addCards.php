@@ -1,3 +1,8 @@
+<?php
+require_once("cardsDB.php");
+$cards = selectCards();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,7 +20,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body style="height: 3000px">
+<body>
     <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light ps-2 pt-4 pb-4">
             <div class="container-fluid">
@@ -40,6 +45,11 @@
             </div>
         </nav>
     </header>
+
+    <div class="form-container">
+        <h1>Add new card</h1>
+    </div>
+
 </body>
 
 </html>

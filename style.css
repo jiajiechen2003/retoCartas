@@ -20,6 +20,14 @@ header {
     background-color: white;
 }
 
+#navbarNav {
+    justify-content: right;
+}
+
+.navbar li {
+    margin: 0 5px;
+}
+
 .navbar-nav {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 300;
@@ -36,7 +44,7 @@ header {
     align-items: center;
 }
 
-#carta {
+.card {
     height: 500px;
     width: 330px;
     margin: 30px 20px;
@@ -96,7 +104,9 @@ header {
     align-items: center;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(40px);
-    border-radius: 10px;
+    border-radius: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
@@ -115,7 +125,8 @@ header {
     align-items: center;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(40px);
-    border-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .card-crew h4 {
@@ -218,4 +229,19 @@ header {
     height: 100%;
     border: 0px;
     margin-top: 40px;
+}
+
+.form-container {
+    width: 50%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.form-container h1 {
+    margin-top: 10px;
+    font-family: monaco,Consolas,Lucida Console,monospace; 
 }
