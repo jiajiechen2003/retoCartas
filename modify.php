@@ -1,8 +1,8 @@
 <?php
-
 require_once("cardsDB.php");
 
-if (isset($_POST["add"])) {
+
+if (isset($_POST["modifyCard"])) {
     $targetDirectory = "img/";
     $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
     $uploadOk = 1;
@@ -14,17 +14,18 @@ if (isset($_POST["add"])) {
     }
 
     if (isset($_POST['group2'])) {
-        insertCards(
+        updateCards(
             $_POST['name'],
             $_POST['power'],
             $_POST['attribute'],
             $_POST['type'],
             $_POST['group'],
             $_POST['group2'],
-            $rutaImagen
+            $rutaImagen,
+            
         );
     } else {
-        insertCards(
+        updateCards(
             $_POST['name'],
             $_POST['power'],
             $_POST['attribute'],
@@ -40,4 +41,5 @@ if (isset($_POST["add"])) {
     header("Location: index.php");
     exit();
 }
+
 ?>

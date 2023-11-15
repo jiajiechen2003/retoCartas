@@ -37,6 +37,52 @@ function selectCards()
     return $resultado;
 }
 
+function selectAttributes() {
+    $conn = openDBCards();
+
+    $select = "SELECT * FROM atributos";
+
+    $sentencia = $conn->prepare($select);
+    $sentencia->execute();
+
+    $resultado = $sentencia->fetchAll();
+
+    $conn = closeDB();
+
+    return $resultado;
+}
+
+function selectTypes() {
+    $conn = openDBCards();
+
+    $select = "SELECT * FROM tipocarta";
+
+    $sentencia = $conn->prepare($select);
+    $sentencia->execute();
+
+    $resultado = $sentencia->fetchAll();
+
+    $conn = closeDB();
+
+    return $resultado;
+}
+
+function selectGroups() {
+    $conn = openDBCards();
+
+    $select = "SELECT * FROM grupos";
+
+    $sentencia = $conn->prepare($select);
+    $sentencia->execute();
+
+    $resultado = $sentencia->fetchAll();
+
+    $conn = closeDB();
+
+    return $resultado;
+}
+
+
 function selectAttribute($id_carta)
 {
     $conn = openDBCards();
@@ -119,10 +165,7 @@ function selectSecondaryGroup($id_carta)
     return $resultado;
 }
 
-
-function insertCards()
-{
-
+function insertCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen) {
     try {
         $conn = openDBCards();
 
@@ -136,13 +179,43 @@ function insertCards()
         $sentencia->bindParam(':grupo_secundario', $grupo_secundario);
         $sentencia->bindParam(':imagen', $imagen);
 
-        $nombre = 'Usopp';
-        $poder = '4000';
-        $atributo = 1;
-        $tipo_carta = 1;
-        $grupo = 1;
-        $grupo_secundario = null;
-        $imagen = 'img/usopp.jpg';
+        $sentencia->execute();
+        
+        $conn = closeDB();
+    } catch (PDOException $e) {
+        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
+    }
+}
+
+function insertGroups ($grupo) {
+    try {
+        $conn = openDBCards();
+
+        $insert = "INSERT INTO grupos (grupo) VALUES (:grupo);";
+        $sentencia = $conn->prepare($insert);
+        $sentencia->bindParam(':grupo', $grupo);
+        $sentencia->execute();
+
+        $conn = closeDB();
+    } catch (PDOException $e) {
+        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
+    }
+}
+
+function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen) {
+    try {
+        $conn = openDBCards();
+
+        $update = "UPDATE cartas SET nombre = :nombre, poder = :poder, atributo = :atributo, tipo_carta = :tipo_carta, grupo = :grupo, grupo_secundario = :grupo_secundario,
+        imagen = :imagen WHERE id_carta = :id_carta";
+        $sentencia = $conn->prepare($update);
+        $sentencia->bindParam(':nombre', $nombre);
+        $sentencia->bindParam(':poder', $poder);
+        $sentencia->bindParam(':atributo', $atributo);
+        $sentencia->bindParam(':tipo_carta', $tipo_carta);
+        $sentencia->bindParam(':grupo', $grupo);
+        $sentencia->bindParam(':grupo_secundario', $grupo_secundario);
+        $sentencia->bindParam(':imagen', $imagen);
 
         $sentencia->execute();
 
@@ -150,7 +223,6 @@ function insertCards()
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
     }
-
 }
 
 function deleteCards()

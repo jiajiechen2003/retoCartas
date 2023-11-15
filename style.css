@@ -24,6 +24,10 @@ header {
     justify-content: right;
 }
 
+#modifyNav {
+    justify-content: center;
+}
+
 .navbar li {
     margin: 0 5px;
 }
@@ -57,28 +61,28 @@ header {
 }
 
 
-.leader-card-stats {
+.card-stats {
     position: absolute;
     width: 100%;
     height: 40px;
     background: linear-gradient(to bottom, blue, pink);
 }
 
-.leader-power {
+.card-power {
     width: 100%;
     height: 100%;
 }
 
-.leader-power h3 {
+.card-power h3 {
     display: inline;
     font-size: 25px;
     position: absolute;
-    right: 50px;
+    right: 42px;
     top: 5px;
     color: white;
 }
 
-.leader-power h2 {
+.card-power h2 {
     display: inline;
     font-size: 22px;
     position: absolute;
@@ -137,94 +141,53 @@ header {
     margin-top: 5px;
 }
 
-.character-power h2 {
-    display: inline;
-    font-size: 22px;
-    position: absolute;
-    top: 5px;
-    margin-left: 10px;
-    color: white;
-}
-
-.character-card-stats {
-    position: absolute;
-    width: 100%;
-    height: 40px;
-    background: linear-gradient(to bottom, blue, pink);
-}
-
-.character-power {
-    width: 100%;
-    height: 100%;
-}
-
-.character-power h3 {
-    display: inline;
-    font-size: 25px;
-    position: absolute;
-    right: 50px;
-    top: 5px;
-    color: white;
-}
-
-#slash {
+#Slash {
     position: absolute;
     height: 35px;
     display: inline;
     top: 4px;
-    right: 3px;
-}
-
-#ranged {
-    position: absolute;
-    height: 42px;
-    display: inline;
-    top: 0px;
-    right: 3px;
-}
-
-#strike {
-    position: absolute;
-    height: 42px;
-    display: inline;
-    top: 0px;
     right: 0px;
 }
 
-#special {
+#Ranged {
+    position: absolute;
+    height: 42px;
+    display: inline;
+    top: -1px;
+    right: -1px;
+}
+
+#Strike {
+    position: absolute;
+    height: 42px;
+    display: inline;
+    top: -1px;
+    right: -5px;
+}
+
+#Special {
+    position: absolute;
+    height: 42px;
+    width: 41px;
+    display: inline-block;
+    top: -1px;
+    right: -1px;
+}
+
+#Wisdom {
     position: absolute;
     height: 42px;
     display: inline-block;
-    top: 0px;
-    right: 3px;
+    top: -1px;
+    right: -3px;
 }
 
-#wisdom {
-    position: absolute;
-    height: 42px;
-    display: inline-block;
-    top: 0px;
-    right: 3px;
-}
-
-.leader-img {
+.card-img {
     width: 100%;
     height: 100%;
 }
 
-.leader-img img {
-    width: 100%;
-    height: 100%;
-    border: 0px;
-    margin-top: 40px;
-}
-
-.character-img {
-    width: 100%;
-    height: 100%;
-}
-
-.character-img img {
+.card-img img {
     width: 100%;
     height: 100%;
     border: 0px;
@@ -244,4 +207,21 @@ header {
 .form-container h1 {
     margin-top: 10px;
     font-family: monaco,Consolas,Lucida Console,monospace; 
+}
+
+option {
+    text-transform: capitalize;
+}
+
+.btn-primary.modify-button {
+    display: flex;
+    width: 100px;
+    height: 28px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#modifyForm label {
+    margin-left: 3px;
 }
