@@ -11,14 +11,4 @@ if (isset($_POST["addGroups"])) {
     header("Location: index.php");
     exit();
 }
-
-if (isset($_POST["addGroups2"])) {
-
-    insertGroups(
-        $_POST['group']
-    );
-
-    header("Location: modifyCards.php");
-    exit();
-}
 ?>

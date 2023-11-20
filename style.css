@@ -24,9 +24,6 @@ header {
     justify-content: right;
 }
 
-#modifyNav {
-    justify-content: center;
-}
 
 .navbar li {
     margin: 0 5px;
@@ -38,6 +35,13 @@ header {
     font-style: normal;
 }
 
+#addCardButton {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+/* MAIN CARDS STYLE */
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -194,6 +198,172 @@ header {
     margin-top: 40px;
 }
 
+
+/* SINGLE CARDS INSIDE MODAL */
+
+#modalCard {
+    margin: 0;
+    height: 0;
+    width: 0;
+    margin-top: 20%;
+}
+
+#modalCard .card {
+    height: 600px;
+    width: 430px;
+}
+
+#modalCard .card:hover {
+    transform: none;
+}
+
+#modalCard .card-stats {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, blue, pink);
+}
+
+#modalCard .card-power {
+    width: 100%;
+    height: 100%;
+}
+
+#modalCard .card-power h3 {
+    display: inline;
+    font-size: 28px;
+    position: absolute;
+    right: 53px;
+    top: 8px;
+    color: white;
+}
+
+#modalCard .card-power h2 {
+    display: inline;
+    font-size: 28px;
+    position: absolute;
+    top: 6px;
+    margin-left: 10px;
+    color: white;
+}
+
+#modalCard .card-text {
+    position: absolute;
+    width: 90%;
+    align-self: center;
+    height: 50px;
+    top: 555px;
+    justify-content: center;
+}
+
+#modalCard .card-type {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(40px);
+    border-radius: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+#modalCard .card-type h4 {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    margin-top: 7px;
+}
+
+#modalCard .card-crew {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(40px);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#modalCard .card-crew h4 {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
+
+#modalCard #Slash {
+    position: absolute;
+    height: 42px;
+    width: 51px;
+    display: inline;
+    top: 6px;
+    right: 0px;
+}
+
+#modalCard #Ranged {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    display: inline;
+    top: 0px;
+    right: 2px;
+}
+
+#modalCard #Strike {
+    position: absolute;
+    height: 47px;
+    width: 59px;
+    display: inline;
+    top: 2px;
+    right: -3px;
+}
+
+#modalCard #Special {
+    position: absolute;
+    height: 50px;
+    width: 48px;
+    display: inline-block;
+    top: 0px;
+    right: 2px;
+}
+
+#modalCard #Wisdom {
+    position: absolute;
+    height: 50px;
+    width: 55px;
+    display: inline-block;
+    top: 0px;
+    right: -1px;
+}
+
+#editButton {
+    position: absolute;
+    left: 435px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+#deleteButton {
+    position: absolute;
+    top: 50px;
+    left: 435px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: red;
+    border-color: red;
+}
+
+
+/* MODAL FORM */
+
 .form-container {
     width: 50%;
     height: 200px;
@@ -203,7 +373,6 @@ header {
     margin: 0 auto;
     border-radius: 20px;
 }
-
 .form-container h1 {
     margin-top: 10px;
     font-family: monaco,Consolas,Lucida Console,monospace; 

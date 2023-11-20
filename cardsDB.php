@@ -37,7 +37,8 @@ function selectCards()
     return $resultado;
 }
 
-function selectAttributes() {
+function selectAttributes()
+{
     $conn = openDBCards();
 
     $select = "SELECT * FROM atributos";
@@ -52,7 +53,8 @@ function selectAttributes() {
     return $resultado;
 }
 
-function selectTypes() {
+function selectTypes()
+{
     $conn = openDBCards();
 
     $select = "SELECT * FROM tipocarta";
@@ -67,7 +69,8 @@ function selectTypes() {
     return $resultado;
 }
 
-function selectGroups() {
+function selectGroups()
+{
     $conn = openDBCards();
 
     $select = "SELECT * FROM grupos";
@@ -165,7 +168,8 @@ function selectSecondaryGroup($id_carta)
     return $resultado;
 }
 
-function insertCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen) {
+function insertCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen)
+{
     try {
         $conn = openDBCards();
 
@@ -180,14 +184,18 @@ function insertCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_sec
         $sentencia->bindParam(':imagen', $imagen);
 
         $sentencia->execute();
-        
-        $conn = closeDB();
+
+        $_SESSION['message'] = 'Card added successfully';
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
     }
+
+    $conn = closeDB();
+
 }
 
-function insertGroups ($grupo) {
+function insertGroups($grupo)
+{
     try {
         $conn = openDBCards();
 
@@ -202,7 +210,8 @@ function insertGroups ($grupo) {
     }
 }
 
-function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen) {
+function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen, $id_carta)
+{
     try {
         $conn = openDBCards();
 
@@ -216,6 +225,7 @@ function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_sec
         $sentencia->bindParam(':grupo', $grupo);
         $sentencia->bindParam(':grupo_secundario', $grupo_secundario);
         $sentencia->bindParam(':imagen', $imagen);
+        $sentencia->bindParam(':id_carta', $id_carta);
 
         $sentencia->execute();
 
@@ -225,13 +235,14 @@ function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_sec
     }
 }
 
-function deleteCards()
+function deleteCards($id_carta)
 {
     try {
         $conn = openDBCards();
 
-        $delete = "DELETE FROM cadenas WHERE cif = 'A65473825'";
+        $delete = "DELETE FROM cartas WHERE id_carta = :id_carta";
         $sentencia = $conn->prepare($delete);
+        $sentencia->bindParam(':id_carta', $id_carta);
         $sentencia->execute();
 
         $conn = closeDB();
@@ -240,6 +251,5 @@ function deleteCards()
     }
 
 }
-
 
 ?>

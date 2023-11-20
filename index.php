@@ -21,6 +21,7 @@ $groups = selectGroups();
         crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/700997539d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -37,19 +38,14 @@ $groups = selectGroups();
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">
-                                ADD NEW CARD
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"
+                                id="addCardButton">
+                                <i class="fa-solid fa-plus"></i>
                             </button>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="modifyCards.php" class="btn btn-primary" role="button">MODIFY CARD</a>
-                        </li>
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#delete">
-                                DELETE CARD
-                            </button>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -57,6 +53,7 @@ $groups = selectGroups();
     </header>
 
     <!-- CARDS DISPLAY -->
+    <?php require_once("cardsDB.php"); ?>
     <div class="cards">
         <?php foreach ($cards as $card) { ?>
             <?php $attribute = selectAttribute($card['id_carta']);
@@ -65,7 +62,7 @@ $groups = selectGroups();
             $group = selectGroup($card['id_carta']);
             $secondaryGroup = selectSecondaryGroup($card['id_carta']);
             ?>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#card<?php echo $card['id_carta']; ?>" class="card">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#card<?php echo $card['id_carta']; ?>" class="card" id="<?php echo $card['id_carta']; ?>">
                 <div class="card-stats">
                     <div class="card-power">
                         <h2>
@@ -109,11 +106,12 @@ $groups = selectGroups();
             </a>
         <?php } ?>
 
+        <!-- MODAL FOR SINGLE CARD -->
         <?php foreach ($cards as $card) { ?>
             <div class="modal fade" id="card<?php echo $card['id_carta']; ?>" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content d-flex align-items-center " style="width: 0px; height: 0px;">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="modalCard">
                         <?php $attribute = selectAttribute($card['id_carta']);
                         $attributeImage = selectAttributeImage($card['id_carta']);
                         $type = selectType($card['id_carta']);
@@ -161,6 +159,11 @@ $groups = selectGroups();
                                     </h4>
                                 </div>
                             </div>
+                            <button type="button" class="btn btn-primary modify-button" data-bs-toggle="modal"
+                                data-bs-target="#modify<?php echo $card['id_carta']; ?>" id="editButton"><i
+                                    class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete"
+                                id="deleteButton"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </div>
                 </div>
@@ -262,11 +265,12 @@ $groups = selectGroups();
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="group" name="group"
                                     placeholder="Straw Hat Crew" required>
-                                <label for="name">Group's Name</label>
+                                <label for="name">Group's Name (Ex. Straw Hat Crew)</label>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" name="addGroups">Save changes</button>
+                                <button type="submit" class="btn btn-primary" name="addGroups">Save
+                                    changes</button>
                             </div>
                         </form>
                     </div>
@@ -275,6 +279,155 @@ $groups = selectGroups();
             </div>
         </div>
 
+        <!-- EDIT MODAL -->
+
+        <?php foreach ($cards as $card) { ?>
+            <?php $attribute = selectAttribute($card['id_carta']);
+            $type = selectType($card['id_carta']);
+            $group = selectGroup($card['id_carta']);
+            $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+            ?>
+            <div class="modal fade" id="modify<?php echo $card['id_carta']; ?>" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modify
+                                <?php echo $card['nombre']; ?> Card
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM TO MODIFY CARDS -->
+                            <form action="modify.php" method="POST" enctype="multipart/form-data" id="modifyForm">
+                                <div class="form-floating mb-3">
+                                    <input type="text"  id="id_carta" name="id_carta" value="<?php echo $card['id_carta']; ?>" hidden>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                                        value="<?php echo $card['nombre']; ?>">
+                                    <label for="name">Name
+                                        <?php // echo "(" . $card['nombre'] . ")"; ?>
+                                    </label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="power" name="power" placeholder="5000"
+                                        min="1000" max="20000" step="1000" value="<?php echo $card['poder']; ?>">
+                                    <label for="power">Power
+                                        <?php // echo " (" . $card['poder'] . ")"; ?>
+                                    </label>
+                                </div>
+
+                                <label for="attribute">Attribute
+                                    <?php foreach ($attribute as $value) {
+                                        echo " (" . $value['atributo'] . ")";
+                                    } ?>
+                                </label>
+                                <select class="form-select form-select-lg mb-3" aria-label="Large select example"
+                                    name="attribute" required>
+                                    <option disabled selected>Choose An Attribute</option>
+                                    <?php foreach ($attributes as $attribute) { ?>
+                                        <option value="<?php echo $attribute['id_atributo'] ?>">
+                                            <?php echo $attribute['atributo'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+
+                                <label for="type">Type
+                                    <?php foreach ($type as $value) {
+                                        echo " (" . $value['tipo'] . ")";
+                                    } ?>
+                                </label>
+                                <select class="form-select form-select-lg mb-3" aria-label="Large select example"
+                                    name="type" required>
+                                    <option disabled selected>Choose Card type</option>
+                                    <?php foreach ($types as $type) { ?>
+                                        <option value="<?php echo $type['id_tipo'] ?>">
+                                            <?php echo $type['tipo'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+
+                                <label for="group">Group
+                                    <?php foreach ($group as $value) {
+                                        echo " (" . $value['grupo'] . ")";
+                                    } ?>
+                                </label>
+                                <select class="form-select form-select-lg mb-3" aria-label="Large select example"
+                                    name="group" required>
+                                    <option disabled selected>Select Group</option>
+                                    <?php foreach ($groups as $group) { ?>
+                                        <option value="<?php echo $group['id_grupo'] ?>">
+                                            <?php echo $group['grupo'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+
+                                <label for="group2">Secondary Group
+                                    <?php
+                                    if ($secondaryGroup != null) {
+                                        foreach ($secondaryGroup as $value) {
+                                            echo "(" . $value['grupo'] . ")";
+                                        }
+                                    }
+                                    ?>
+
+                                </label>
+                                <select class="form-select form-select-lg mb-3" aria-label="Large select example"
+                                    name="group2">
+                                    <option disabled selected>Select Secondary Group</option>
+                                    <?php foreach ($groups as $group) { ?>
+                                        <option value="<?php echo $group['id_grupo'] ?>">
+                                            <?php echo $group['grupo'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+
+                                <div class="form-floating mb-3">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#addGroup">
+                                        Add group
+                                    </button>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Select an Image
+                                        <?php echo " (" . $card['imagen'] . ")"; ?>
+                                    </label>
+                                    <input class="form-control" type="file" id="formFile" name="image" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" name="modifyCard">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+        <!-- DELETE MODAL -->
+
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this card?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="deleteCards.php" method="POST">
+                            <input type="hidden" name="id_carta" value="<?php echo $card['id_carta']; ?>">
+                            <button type="submit" class="btn btn-danger" name="deleteCard">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>

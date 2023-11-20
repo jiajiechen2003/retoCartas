@@ -13,6 +13,7 @@ if (isset($_POST["modifyCard"])) {
         echo "Hubo un error al subir la imagen.";
     }
 
+
     if (isset($_POST['group2'])) {
         updateCards(
             $_POST['name'],
@@ -22,7 +23,7 @@ if (isset($_POST["modifyCard"])) {
             $_POST['group'],
             $_POST['group2'],
             $rutaImagen,
-            
+            $_POST['id_carta']
         );
     } else {
         updateCards(
@@ -32,11 +33,12 @@ if (isset($_POST["modifyCard"])) {
             $_POST['type'],
             $_POST['group'],
             null,
-            $rutaImagen
+            $rutaImagen,
+            $_POST['id_carta']
         );
     }
 
-    echo "Card added successfully.";
+
 
     header("Location: index.php");
     exit();

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once("cardsDB.php");
 
 if (isset($_POST["add"])) {
@@ -37,7 +37,10 @@ if (isset($_POST["add"])) {
 
     echo "Card added successfully.";
 
-    header("Location: index.php");
-    exit();
+    if (isset($_SESSION['message'])) {
+        header("Location: index.php");
+        exit();
+    }
+
 }
 ?>
