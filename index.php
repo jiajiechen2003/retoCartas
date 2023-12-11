@@ -4,6 +4,7 @@ $cards = selectCards();
 $attributes = selectAttributes();
 $types = selectTypes();
 $groups = selectGroups();
+$cardGroup = selectCardsGroups();
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,6 @@ $groups = selectGroups();
 </head>
 
 <body>
-
     <!-- HEADER WITH MODALS -->
     <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light ps-2 pt-4 pb-4">
@@ -53,8 +53,9 @@ $groups = selectGroups();
             <?php $attribute = selectAttribute($card['id_carta']);
             $attributeImage = selectAttributeImage($card['id_carta']);
             $type = selectType($card['id_carta']);
-            $group = selectGroup($card['id_carta']);
-            $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+            // $group = selectGroup($card['id_carta']);
+            // $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+            $cardGroup = selectCardGroup($card['id_carta']);
             ?>
             <a href="#" data-bs-toggle="modal" data-bs-target="#card<?php echo $card['id_carta']; ?>" class="card" id="<?php echo $card['id_carta']; ?>">
                 <div class="card-stats">
@@ -86,12 +87,12 @@ $groups = selectGroups();
                     <div class="card-crew">
                         <h4>
                             <?php
-                            foreach ($group as $crew1) {
+                            $count = count($cardGroup);
+                            foreach ($cardGroup as $index => $crew1) {
                                 echo $crew1['grupo'];
-                            }
-
-                            foreach ($secondaryGroup as $crew2) {
-                                echo "/" . $crew2['grupo'];
+                                if ($index < $count - 1) {
+                                    echo " / ";
+                                }
                             }
                             ?>
                         </h4>
@@ -108,8 +109,9 @@ $groups = selectGroups();
                         <?php $attribute = selectAttribute($card['id_carta']);
                         $attributeImage = selectAttributeImage($card['id_carta']);
                         $type = selectType($card['id_carta']);
-                        $group = selectGroup($card['id_carta']);
-                        $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+                        // $group = selectGroup($card['id_carta']);
+                        // $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+                        $cardGroup = selectCardGroup($card['id_carta']);
                         ?>
                         <div class="card">
                             <div class="card-stats">
@@ -141,12 +143,12 @@ $groups = selectGroups();
                                 <div class="card-crew">
                                     <h4>
                                         <?php
-                                        foreach ($group as $crew1) {
+                                        $count = count($cardGroup);
+                                        foreach ($cardGroup as $index => $crew1) {
                                             echo $crew1['grupo'];
-                                        }
-
-                                        foreach ($secondaryGroup as $crew2) {
-                                            echo "/" . $crew2['grupo'];
+                                            if ($index < $count - 1) {
+                                                echo " / ";
+                                            }
                                         }
                                         ?>
                                     </h4>
@@ -197,7 +199,7 @@ $groups = selectGroups();
                                 <?php } ?>
                             </select>
 
-                            <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="group" required>
+                            <select multiple class="form-select form-select-lg mb-3" aria-label="Large select example" name="group[]" required>
                                 <option disabled selected>Group</option>
                                 <?php foreach ($groups as $group) { ?>
                                     <option value="<?php echo $group['id_grupo'] ?>">
@@ -206,14 +208,14 @@ $groups = selectGroups();
                                 <?php } ?>
                             </select>
 
-                            <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="group2">
+                            <!-- <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="group2">
                                 <option disabled selected>Secondary Group</option>
                                 <?php foreach ($groups as $group) { ?>
                                     <option value="<?php echo $group['id_grupo'] ?>">
                                         <?php echo $group['grupo'] ?>
                                     </option>
                                 <?php } ?>
-                            </select>
+                            </select> -->
 
                             <div class="form-floating mb-3">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroup">
@@ -266,8 +268,8 @@ $groups = selectGroups();
         <?php foreach ($cards as $card) { ?>
             <?php $attribute = selectAttribute($card['id_carta']);
             $type = selectType($card['id_carta']);
-            $group = selectGroup($card['id_carta']);
-            $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+            // $group = selectGroup($card['id_carta']);
+            // $secondaryGroup = selectSecondaryGroup($card['id_carta']);
             ?>
             <div class="modal fade" id="modify<?php echo $card['id_carta']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">

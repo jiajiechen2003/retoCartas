@@ -1,6 +1,8 @@
 CREATE DATABASE IF NOT EXISTS OnePieceCartas;
 use OnePieceCartas;
 
+drop database onepiececartas;
+
 drop table tipoCarta;
 CREATE TABLE IF NOT EXISTS tipoCarta (
 	id_tipo int auto_increment,
