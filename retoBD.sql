@@ -32,6 +32,8 @@ INSERT INTO grupos (grupo) VALUES ('Straw Hat Crew'), ('Heart Pirates') , ('Shic
     ('Whitebeard Pirates'), ('Roger Pirates'), ('Navy'), ('Blackbeard Pirates'), ('Beast Pirates') , ('Big Mom Pirates'), ('Bonney Pirates'),
     ('Worst Generation'), ('Baroque Works')
     ;
+    
+    DELETE FROM grupos WHERE ID_GRUPO = 21;
 
 UPDATE GRUPOS SET grupo = 'Straw Hat Crew' WHERE id_grupo = 1;
 

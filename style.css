@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    margin-bottom: 150px;
+    margin-bottom: 105px;
 }
 
 .navbar {
@@ -50,6 +50,7 @@ header {
     margin: 0 auto;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .card {

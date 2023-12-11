@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once("cardsDB.php");
 
 if (isset($_POST["deleteCard"])) {
@@ -7,10 +7,12 @@ if (isset($_POST["deleteCard"])) {
 
     deleteCards($id_card);
 
-    echo "Card deleted successfully.";
-
-    header("Location: index.php");
-    exit();
+    if (isset($_SESSION['deleted'])) {
+        header("Location: index.php");
+        exit();
+    } else {
+        header("Location: index.php");
+        exit();
+    }
 }
-
 ?>

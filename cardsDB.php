@@ -9,6 +9,7 @@ function openDBCards()
     $username = "root";
     $password = "mysql";
 
+
     $conn = new PDO("mysql:host=$servername;dbname=onepiececartas", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conn->exec("set names utf8");
@@ -185,7 +186,32 @@ function insertCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_sec
 
         $sentencia->execute();
 
-        $_SESSION['message'] = 'Card added successfully';
+        $_SESSION['addedCard'] = 'Card Added Successfully';
+    } catch (PDOException $e) {
+        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
+    }
+
+    $conn = closeDB();
+}
+
+function insertGroups($grupo)
+{
+    try {
+        $conn = openDBCards();
+
+        if (!groupExists($grupo)) {
+
+            $insert = "INSERT INTO grupos (grupo) VALUES (:grupo);";
+            $sentencia = $conn->prepare($insert);
+            $sentencia->bindParam(':grupo', $grupo);
+            $sentencia->execute();
+            $_SESSION['addedGroup'] = 'Group Added Successfully';
+        } else {
+            $_SESSION['existingGroup'] = 'Group Already Exists';
+            header("Location: index.php");
+            exit();
+        }
+
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
     }
@@ -194,21 +220,28 @@ function insertCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_sec
 
 }
 
-function insertGroups($grupo)
+function groupExists($grupo)
 {
     try {
         $conn = openDBCards();
 
-        $insert = "INSERT INTO grupos (grupo) VALUES (:grupo);";
-        $sentencia = $conn->prepare($insert);
+        $select = "SELECT COUNT(*) FROM grupos WHERE grupo = :grupo";
+        $sentencia = $conn->prepare($select);
         $sentencia->bindParam(':grupo', $grupo);
         $sentencia->execute();
 
-        $conn = closeDB();
+        $count = $sentencia->fetchColumn();
+
+        return $count > 0;
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
+        return false;
     }
+
+    $conn = closeDB();
+
 }
+
 
 function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen, $id_carta)
 {
@@ -229,10 +262,14 @@ function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_sec
 
         $sentencia->execute();
 
-        $conn = closeDB();
+        $_SESSION['edited'] = 'Card Modified Succesfully';
+
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
     }
+
+    $conn = closeDB();
+
 }
 
 function deleteCards($id_carta)
@@ -245,11 +282,12 @@ function deleteCards($id_carta)
         $sentencia->bindParam(':id_carta', $id_carta);
         $sentencia->execute();
 
-        $conn = closeDB();
+        $_SESSION['deleted'] = 'Card Deleted Successfully';
+
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
     }
 
-}
+    $conn = closeDB();
 
-?>
+}

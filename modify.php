@@ -38,10 +38,13 @@ if (isset($_POST["modifyCard"])) {
         );
     }
 
-
-
-    header("Location: index.php");
-    exit();
+    if (isset($_SESSION['edited'])) {
+        header("Location: index.php");
+        exit();
+    } else {
+        header("Location: index.php");
+        exit();
+    }
 }
 
 ?>

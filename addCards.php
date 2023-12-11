@@ -35,9 +35,12 @@ if (isset($_POST["add"])) {
         );
     }
 
-    echo "Card added successfully.";
 
-    if (isset($_SESSION['message'])) {
+    if (isset($_SESSION['addedCard'])) {
+        
+        header("Location: index.php");
+        exit();
+    } else {
         header("Location: index.php");
         exit();
     }
