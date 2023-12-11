@@ -8,7 +8,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:8080/php/retoCartas/index.php",
+            "url": "http://localhost:80/retoCartas/index.php",
             "webRoot": "${workspaceFolder}"
         },
         {
