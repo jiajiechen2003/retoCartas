@@ -4,7 +4,7 @@ $cards = selectCards();
 $attributes = selectAttributes();
 $types = selectTypes();
 $groups = selectGroups();
-$cardGroup = selectCardsGroups();
+$cardsGroups = selectCardsGroups();
 ?>
 
 <!DOCTYPE html>
@@ -87,13 +87,25 @@ $cardGroup = selectCardsGroups();
                     <div class="card-crew">
                         <h4>
                             <?php
+                            // $count = count($cardGroup);
+                            // foreach ($cardGroup as $index => $crew1) {
+                            //     echo $crew1['grupo'];
+                            //     if ($index < $count - 1) {
+                            //         echo " / ";
+                            //     }
+                            // }
+
                             $count = count($cardGroup);
-                            foreach ($cardGroup as $index => $crew1) {
-                                echo $crew1['grupo'];
-                                if ($index < $count - 1) {
+                            $limit = min($count, 2);
+
+                            for ($i = 0; $i < $limit; $i++) {
+                                echo $cardGroup[$i]['grupo'];
+
+                                if ($i < $limit - 1) {
                                     echo " / ";
                                 }
                             }
+
                             ?>
                         </h4>
                     </div>
@@ -144,9 +156,12 @@ $cardGroup = selectCardsGroups();
                                     <h4>
                                         <?php
                                         $count = count($cardGroup);
-                                        foreach ($cardGroup as $index => $crew1) {
-                                            echo $crew1['grupo'];
-                                            if ($index < $count - 1) {
+                                        $limit = min($count, 2);
+
+                                        for ($i = 0; $i < $limit; $i++) {
+                                            echo $cardGroup[$i]['grupo'];
+
+                                            if ($i < $limit - 1) {
                                                 echo " / ";
                                             }
                                         }
@@ -200,7 +215,7 @@ $cardGroup = selectCardsGroups();
                             </select>
 
                             <select multiple class="form-select form-select-lg mb-3" aria-label="Large select example" name="group[]" required>
-                                <option disabled selected>Group</option>
+                                <option disabled>Group</option>
                                 <?php foreach ($groups as $group) { ?>
                                     <option value="<?php echo $group['id_grupo'] ?>">
                                         <?php echo $group['grupo'] ?>
@@ -270,6 +285,7 @@ $cardGroup = selectCardsGroups();
             $type = selectType($card['id_carta']);
             // $group = selectGroup($card['id_carta']);
             // $secondaryGroup = selectSecondaryGroup($card['id_carta']);
+            $cardGroup = selectCardGroup($card['id_carta']);
             ?>
             <div class="modal fade" id="modify<?php echo $card['id_carta']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -286,18 +302,12 @@ $cardGroup = selectCardsGroups();
                                 <div class="form-floating mb-3">
                                     <input type="text" id="id_carta" name="id_carta" value="<?php echo $card['id_carta']; ?>" hidden>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<?php echo $card['nombre']; ?>">
-                                    <label for="name">Name
-                                        <?php // echo "(" . $card['nombre'] . ")"; 
-                                        ?>
-                                    </label>
+                                    <label for="name">Name</label>
                                 </div>
 
                                 <div class="form-floating mb-3">
                                     <input type="number" class="form-control" id="power" name="power" placeholder="5000" min="1000" max="20000" step="1000" value="<?php echo $card['poder']; ?>">
-                                    <label for="power">Power
-                                        <?php // echo " (" . $card['poder'] . ")"; 
-                                        ?>
-                                    </label>
+                                    <label for="power">Power</label>
                                 </div>
 
                                 <label for="attribute">Attribute</label>
@@ -320,21 +330,10 @@ $cardGroup = selectCardsGroups();
                                     <?php } ?>
                                 </select>
 
-                                <label for="group">Group</label>
-                                <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="group" required>
-                                    <option disabled>Select Group</option>
+                                <select multiple class="form-select form-select-lg mb-3" aria-label="Large select example" name="group[]" required>
+                                    <option disabled>Group</option>
                                     <?php foreach ($groups as $group) { ?>
-                                        <option value="<?php echo $group['id_grupo'] ?>" <?php if ($group['id_grupo'] == $card['grupo']) echo 'selected' ?>>
-                                            <?php echo $group['grupo'] ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-
-                                <label for="group2">Secondary Group</label>
-                                <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="group2">
-                                    <option disabled selected>Select Secondary Group</option>
-                                    <?php foreach ($groups as $group) { ?>
-                                        <option value="<?php echo $group['id_grupo'] ?>" <?php if ($group['id_grupo'] == $card['grupo_secundario']) echo 'selected' ?>>
+                                        <option value="<?php echo $group['id_grupo'] ?>">
                                             <?php echo $group['grupo'] ?>
                                         </option>
                                     <?php } ?>

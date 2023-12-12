@@ -35,7 +35,7 @@ if (isset($_POST["add"])) {
     //     );
     // }
 
-    $id_carta = insertCards2(
+    $id_carta = insertCards(
         $_POST['name'],
         $_POST['power'],
         $_POST['attribute'],

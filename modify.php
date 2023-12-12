@@ -1,7 +1,6 @@
 <?php
 require_once("cardsDB.php");
 
-
 if (isset($_POST["modifyCard"])) {
     $targetDirectory = "img/";
     $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
@@ -13,29 +12,21 @@ if (isset($_POST["modifyCard"])) {
         echo "Hubo un error al subir la imagen.";
     }
 
+    $cardGroup = selectCardGroupID($_POST['id_carta']);
+    foreach ($cardGroup as $value) {
+        echo $value;
+    }
+    updateCards(
+        $_POST['name'],
+        $_POST['power'],
+        $_POST['attribute'],
+        $_POST['type'],
+        $rutaImagen,
+        $_POST['id_carta']
+    );
 
-    if (isset($_POST['group2'])) {
-        updateCards(
-            $_POST['name'],
-            $_POST['power'],
-            $_POST['attribute'],
-            $_POST['type'],
-            $_POST['group'],
-            $_POST['group2'],
-            $rutaImagen,
-            $_POST['id_carta']
-        );
-    } else {
-        updateCards(
-            $_POST['name'],
-            $_POST['power'],
-            $_POST['attribute'],
-            $_POST['type'],
-            $_POST['group'],
-            null,
-            $rutaImagen,
-            $_POST['id_carta']
-        );
+    foreach ($_POST['group'] as $group) {
+        updateCardGroups($_POST['id_carta'], $group, $cardGroup);
     }
 
     if (isset($_SESSION['edited'])) {
@@ -46,5 +37,3 @@ if (isset($_POST["modifyCard"])) {
         exit();
     }
 }
-
-?>

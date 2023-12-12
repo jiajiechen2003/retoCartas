@@ -201,32 +201,23 @@ function selectCardGroup($id_carta)
     return $resultado;
 }
 
-function insertCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen)
+function selectCardGroupID($id_carta)
 {
-    try {
-        $conn = openDBCards();
+    $conn = openDBCards();
 
-        $insert = "INSERT INTO cartas (nombre, poder, atributo, tipo_carta, grupo, grupo_secundario, imagen) VALUES (:nombre, :poder, :atributo, :tipo_carta, :grupo, :grupo_secundario, :imagen)";
-        $sentencia = $conn->prepare($insert);
-        $sentencia->bindParam(':nombre', $nombre);
-        $sentencia->bindParam(':poder', $poder);
-        $sentencia->bindParam(':atributo', $atributo);
-        $sentencia->bindParam(':tipo_carta', $tipo_carta);
-        $sentencia->bindParam(':grupo', $grupo);
-        $sentencia->bindParam(':grupo_secundario', $grupo_secundario);
-        $sentencia->bindParam(':imagen', $imagen);
+    $select = "SELECT grupos.id_grupo FROM grupos JOIN cartas_has_grupos ON  cartas_has_grupos.grupos_id_grupo = grupos.id_grupo JOIN cartas ON cartas.id_carta = cartas_has_grupos.cartas_id_carta WHERE cartas.id_carta = $id_carta;";
 
-        $sentencia->execute();
+    $sentencia = $conn->prepare($select);
+    $sentencia->execute();
 
-        $_SESSION['addedCard'] = 'Card Added Successfully';
-    } catch (PDOException $e) {
-        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
-    }
+    $resultado = $sentencia->fetchAll();
 
     $conn = closeDB();
+
+    return $resultado;
 }
 
-function insertCards2($nombre, $poder, $atributo, $tipo_carta, $imagen)
+function insertCards($nombre, $poder, $atributo, $tipo_carta, $imagen)
 {
     try {
         $conn = openDBCards();
@@ -253,19 +244,66 @@ function insertCards2($nombre, $poder, $atributo, $tipo_carta, $imagen)
     $conn = closeDB();
 }
 
+function updateCards($nombre, $poder, $atributo, $tipo_carta, $imagen, $id_carta)
+{
+    try {
+        $conn = openDBCards();
+
+        $update = "UPDATE cartas SET nombre = :nombre, poder = :poder, atributo = :atributo, tipo_carta = :tipo_carta,
+        imagen = :imagen WHERE id_carta = :id_carta";
+        $sentencia = $conn->prepare($update);
+        $sentencia->bindParam(':nombre', $nombre);
+        $sentencia->bindParam(':poder', $poder);
+        $sentencia->bindParam(':atributo', $atributo);
+        $sentencia->bindParam(':tipo_carta', $tipo_carta);
+        $sentencia->bindParam(':imagen', $imagen);
+        $sentencia->bindParam(':id_carta', $id_carta);
+
+        $sentencia->execute();
+
+        $_SESSION['edited'] = 'Card Modified Succesfully';
+    } catch (PDOException $e) {
+        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
+    }
+
+    $conn = closeDB();
+}
+
 function insertCardGroups($cartas_id_carta, $grupos_id_grupo)
 {
     try {
         $conn = openDBCards();
 
-            $insert = "INSERT INTO cartas_has_grupos (cartas_id_carta, grupos_id_grupo) VALUES (:cartas_id_carta, :grupos_id_grupo)";
-            $sentencia = $conn->prepare($insert);
-            $sentencia->bindParam(':cartas_id_carta', $cartas_id_carta);
-            $sentencia->bindParam(':grupos_id_grupo', $grupos_id_grupo);
+        $insert = "INSERT INTO cartas_has_grupos (cartas_id_carta, grupos_id_grupo) VALUES (:cartas_id_carta, :grupos_id_grupo)";
+        $sentencia = $conn->prepare($insert);
+        $sentencia->bindParam(':cartas_id_carta', $cartas_id_carta);
+        $sentencia->bindParam(':grupos_id_grupo', $grupos_id_grupo);
 
-            $sentencia->execute();
+        $sentencia->execute();
 
         $_SESSION['addedCard'] = 'Card Added Successfully';
+    } catch (PDOException $e) {
+        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
+    }
+
+    $conn = closeDB();
+}
+
+function updateCardGroups($cartas_id_carta, $grupos_id_grupo, $grupos)
+{
+    try {
+        $conn = openDBCards();
+
+        $update = "UPDATE cartas_has_grupos SET grupos_id_grupo = :grupos_id_grupo WHERE (cartas_id_carta = :cartas_id_carta) and (grupos_id_grupo = :grupos);";
+        $sentencia = $conn->prepare($update);
+        $sentencia->bindParam(':grupos_id_grupo', $grupos_id_grupo);
+        $sentencia->bindParam(':cartas_id_carta', $cartas_id_carta);
+        $sentencia->bindParam(':grupos', $grupos);
+
+
+        $sentencia->execute();
+
+        $_SESSION['addedCard'] = 'Card Modified Successfully';
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
     }
@@ -319,32 +357,7 @@ function groupExists($grupo)
 }
 
 
-function updateCards($nombre, $poder, $atributo, $tipo_carta, $grupo, $grupo_secundario, $imagen, $id_carta)
-{
-    try {
-        $conn = openDBCards();
 
-        $update = "UPDATE cartas SET nombre = :nombre, poder = :poder, atributo = :atributo, tipo_carta = :tipo_carta, grupo = :grupo, grupo_secundario = :grupo_secundario,
-        imagen = :imagen WHERE id_carta = :id_carta";
-        $sentencia = $conn->prepare($update);
-        $sentencia->bindParam(':nombre', $nombre);
-        $sentencia->bindParam(':poder', $poder);
-        $sentencia->bindParam(':atributo', $atributo);
-        $sentencia->bindParam(':tipo_carta', $tipo_carta);
-        $sentencia->bindParam(':grupo', $grupo);
-        $sentencia->bindParam(':grupo_secundario', $grupo_secundario);
-        $sentencia->bindParam(':imagen', $imagen);
-        $sentencia->bindParam(':id_carta', $id_carta);
-
-        $sentencia->execute();
-
-        $_SESSION['edited'] = 'Card Modified Succesfully';
-    } catch (PDOException $e) {
-        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
-    }
-
-    $conn = closeDB();
-}
 
 function deleteCards($id_carta)
 {

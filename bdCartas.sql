@@ -14,6 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema onepiececartas
 -- -----------------------------------------------------
+/* drop database if exists onepiececartas; */
 CREATE SCHEMA IF NOT EXISTS `onepiececartas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `onepiececartas` ;
 
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `onepiececartas`.`atributos` (
   `imagen` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_atributo`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `onepiececartas`.`tipocarta` (
   `tipo` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_tipo`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `onepiececartas`.`cartas` (
     FOREIGN KEY (`tipo_carta`)
     REFERENCES `onepiececartas`.`tipocarta` (`id_tipo`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 28
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `onepiececartas`.`grupos` (
   `grupo` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_grupo`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 22
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -127,5 +128,32 @@ INSERT INTO cartas (nombre, poder, atributo, tipo_carta,imagen) VALUES ('Monkey 
     ('Gol D. Roger', 10000, 2, 2,'img/rogerLeader.jpg'), ('Monkey D. Garp', 7000, 4, 2,'img/garpLeader.jpg'), ('Marshal D. Teach', 6000, 3, 2,'img/barbanegraLeader.jpg'),
     ('Kaido', 12000, 4, 2,'img/kaidoLeader.jpg'), ('Akainu', 7000, 3, 2,'img/akainuLeader.jpg'), ('Big Mom', 5000, 3, 2,'img/bigmomLeader.jpg')
     ;
+    
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('1', '1');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('1', '14');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('2', '1');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('2', '14');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('3', '1');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('4', '2');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('4', '14');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('5', '3');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('5', '4');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('6', '1');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('7', '1');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('8', '13');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('8', '14');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('9', '5');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('9', '6');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('10', '5');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('10', '7');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('11', '8');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('12', '9');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('13', '5');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('13', '10');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('14', '5');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('14', '11');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('15', '9');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('16', '5');
+INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('16', '12');
 
 SELECT grupos.grupo FROM grupos JOIN cartas_has_grupos ON  cartas_has_grupos.grupos_id_grupo = grupos.id_grupo JOIN cartas ON cartas.id_carta = cartas_has_grupos.cartas_id_carta WHERE cartas.id_carta = 1;
