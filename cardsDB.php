@@ -5,10 +5,13 @@ session_start();
 function openDBCards()
 {
 
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "mysql";
+
     $servername = "localhost";
     $username = "root";
-    $password = "mysql";
-
+    $password = "jiajiechen2003";
 
     $conn = new PDO("mysql:host=$servername;dbname=onepiececartas", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -352,7 +355,6 @@ function groupExists($grupo)
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
         return false;
     }
-
     $conn = closeDB();
 }
 
