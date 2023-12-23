@@ -35,6 +35,8 @@ if (isset($_POST["add"])) {
     //     );
     // }
 
+
+
     $id_carta = insertCards(
         $_POST['name'],
         $_POST['power'],
@@ -47,7 +49,12 @@ if (isset($_POST["add"])) {
         insertCardGroups($id_carta, $id_grupo);
     }
 
-
+    var_dump($_POST['name'],
+    $_POST['power'],
+    $_POST['attribute'],
+    $_POST['type'],
+    $rutaImagen, $id_carta, $id_grupo);
+    die();
     
     // if (isset($_POST['group2'])) {
     //     insertCardGroups($id_carta, $_POST['group']);

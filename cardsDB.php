@@ -11,7 +11,7 @@ function openDBCards()
 
     $servername = "localhost";
     $username = "root";
-    $password = "jiajiechen2003";
+    $password = "root";
 
     $conn = new PDO("mysql:host=$servername;dbname=onepiececartas", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -297,11 +297,12 @@ function updateCardGroups($cartas_id_carta, $grupos_id_grupo, $grupos)
     try {
         $conn = openDBCards();
 
-        $update = "UPDATE cartas_has_grupos SET grupos_id_grupo = :grupos_id_grupo WHERE (cartas_id_carta = :cartas_id_carta) and (grupos_id_grupo = :grupos);";
+        $groupIds = implode(',', $_POST['group']);
+        $update = "UPDATE cartas_has_grupos SET grupos_id_grupo = :grupos_id_grupo WHERE (cartas_id_carta = :cartas_id_carta) AND (grupos_id_grupo IN ($groupIds))";
         $sentencia = $conn->prepare($update);
         $sentencia->bindParam(':grupos_id_grupo', $grupos_id_grupo);
         $sentencia->bindParam(':cartas_id_carta', $cartas_id_carta);
-        $sentencia->bindParam(':grupos', $grupos);
+        // $sentencia->bindParam(':grupos', $grupos);
 
 
         $sentencia->execute();

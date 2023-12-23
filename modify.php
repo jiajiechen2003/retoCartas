@@ -13,9 +13,7 @@ if (isset($_POST["modifyCard"])) {
     }
 
     $cardGroup = selectCardGroupID($_POST['id_carta']);
-    foreach ($cardGroup as $value) {
-        echo $value;
-    }
+
     updateCards(
         $_POST['name'],
         $_POST['power'],
@@ -28,6 +26,14 @@ if (isset($_POST["modifyCard"])) {
     foreach ($_POST['group'] as $group) {
         updateCardGroups($_POST['id_carta'], $group, $cardGroup);
     }
+
+    var_dump($_POST['group'], $_POST['name'],
+        $_POST['power'],
+        $_POST['attribute'],
+        $_POST['type'],
+        $rutaImagen,
+        $_POST['id_carta'], $_POST['group2']);
+    die();
 
     if (isset($_SESSION['edited'])) {
         header("Location: index.php");
