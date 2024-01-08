@@ -5,13 +5,13 @@ session_start();
 function openDBCards()
 {
 
-    // $servername = "localhost";
-    // $username = "root";
-    // $password = "mysql";
-
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "mysql";
+
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "root";
 
     $conn = new PDO("mysql:host=$servername;dbname=onepiececartas", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -140,38 +140,6 @@ function selectType($id_carta)
     return $resultado;
 }
 
-// function selectGroup($id_carta)
-// {
-//     $conn = openDBCards();
-
-//     $select = "SELECT grupos.grupo FROM grupos JOIN cartas on grupos.id_grupo = cartas.grupo WHERE cartas.id_carta = '$id_carta';";
-
-//     $sentencia = $conn->prepare($select);
-//     $sentencia->execute();
-
-//     $resultado = $sentencia->fetchAll();
-
-//     $conn = closeDB();
-
-//     return $resultado;
-// }
-
-// function selectSecondaryGroup($id_carta)
-// {
-//     $conn = openDBCards();
-
-//     $select = "SELECT grupos.grupo FROM grupos JOIN cartas on grupos.id_grupo = cartas.grupo_secundario WHERE cartas.id_carta = '$id_carta';";
-
-//     $sentencia = $conn->prepare($select);
-//     $sentencia->execute();
-
-//     $resultado = $sentencia->fetchAll();
-
-//     $conn = closeDB();
-
-//     return $resultado;
-// }
-
 function selectCardsGroups()
 {
     $conn = openDBCards();
@@ -292,22 +260,21 @@ function insertCardGroups($cartas_id_carta, $grupos_id_grupo)
     $conn = closeDB();
 }
 
-function updateCardGroups($cartas_id_carta, $grupos_id_grupo, $grupos)
+function updateCardGroups($cartas_id_carta, $grupos_id_grupo)
 {
     try {
         $conn = openDBCards();
 
-        $groupIds = implode(',', $_POST['group']);
-        $update = "UPDATE cartas_has_grupos SET grupos_id_grupo = :grupos_id_grupo WHERE (cartas_id_carta = :cartas_id_carta) AND (grupos_id_grupo IN ($groupIds))";
-        $sentencia = $conn->prepare($update);
-        $sentencia->bindParam(':grupos_id_grupo', $grupos_id_grupo);
-        $sentencia->bindParam(':cartas_id_carta', $cartas_id_carta);
-        // $sentencia->bindParam(':grupos', $grupos);
+        foreach ($_POST['group2'] as $group) {
+            $update = "UPDATE cartas_has_grupos SET grupos_id_grupo = :grupos_id_grupo WHERE (cartas_id_carta = :cartas_id_carta) AND (grupos_id_grupo = $group)";
+            $sentencia = $conn->prepare($update);
 
+            $sentencia->bindParam(':cartas_id_carta', $cartas_id_carta);
+            $sentencia->bindParam(':grupos_id_grupo', $grupos_id_grupo);
+            // $sentencia->bindParam(':grupos', $group);
 
-        $sentencia->execute();
-
-        $_SESSION['addedCard'] = 'Card Modified Successfully';
+            $sentencia->execute();
+        }
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
     }
@@ -360,14 +327,29 @@ function groupExists($grupo)
 }
 
 
-
-
 function deleteCards($id_carta)
 {
     try {
         $conn = openDBCards();
 
         $delete = "DELETE FROM cartas WHERE id_carta = :id_carta";
+        $sentencia = $conn->prepare($delete);
+        $sentencia->bindParam(':id_carta', $id_carta);
+        $sentencia->execute();
+
+        $_SESSION['deleted'] = 'Card Deleted Successfully';
+    } catch (PDOException $e) {
+        $_SESSION['error'] = $e->getCode() . ' - ' . $e->getMessage();
+    }
+
+    $conn = closeDB();
+}
+
+function deleteGroups($id_carta) {
+    try {
+        $conn = openDBCards();
+
+        $delete = "DELETE FROM cartas_has_grupos WHERE cartas_id_carta = :id_carta";
         $sentencia = $conn->prepare($delete);
         $sentencia->bindParam(':id_carta', $id_carta);
         $sentencia->execute();

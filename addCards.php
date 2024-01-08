@@ -12,31 +12,6 @@ if (isset($_POST["add"])) {
     } else {
         echo "Hubo un error al subir la imagen.";
     }
-
-    // if (isset($_POST['group2'])) {
-    //     insertCards(
-    //         $_POST['name'],
-    //         $_POST['power'],
-    //         $_POST['attribute'],
-    //         $_POST['type'],
-    //         $_POST['group'],
-    //         $_POST['group2'],
-    //         $rutaImagen
-    //     );
-    // } else {
-    //     insertCards(
-    //         $_POST['name'],
-    //         $_POST['power'],
-    //         $_POST['attribute'],
-    //         $_POST['type'],
-    //         $_POST['group'],
-    //         null,
-    //         $rutaImagen
-    //     );
-    // }
-
-
-
     $id_carta = insertCards(
         $_POST['name'],
         $_POST['power'],
@@ -48,20 +23,6 @@ if (isset($_POST["add"])) {
     foreach ($_POST['group'] as $id_grupo) {
         insertCardGroups($id_carta, $id_grupo);
     }
-
-    var_dump($_POST['name'],
-    $_POST['power'],
-    $_POST['attribute'],
-    $_POST['type'],
-    $rutaImagen, $id_carta, $id_grupo);
-    die();
-    
-    // if (isset($_POST['group2'])) {
-    //     insertCardGroups($id_carta, $_POST['group']);
-    //     insertCardGroups($id_carta, $_POST['group2']);
-    // } else {
-    //     insertCardGroups($id_carta, $_POST['group']);
-    // }
 
     if (isset($_SESSION['addedCard'])) {
 

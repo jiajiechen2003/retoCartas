@@ -156,4 +156,3 @@ INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_
 INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('16', '5');
 INSERT INTO `onepiececartas`.`cartas_has_grupos` (`cartas_id_carta`, `grupos_id_grupo`) VALUES ('16', '12');
 
-SELECT grupos.grupo FROM grupos JOIN cartas_has_grupos ON  cartas_has_grupos.grupos_id_grupo = grupos.id_grupo JOIN cartas ON cartas.id_carta = cartas_has_grupos.cartas_id_carta WHERE cartas.id_carta = 1;
