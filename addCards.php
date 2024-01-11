@@ -5,7 +5,6 @@ require_once("cardsDB.php");
 if (isset($_POST["add"])) {
     $targetDirectory = "img/";
     $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
-    $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
         $rutaImagen = $targetFile;

@@ -271,7 +271,6 @@ function updateCardGroups($cartas_id_carta, $grupos_id_grupo)
 
             $sentencia->bindParam(':cartas_id_carta', $cartas_id_carta);
             $sentencia->bindParam(':grupos_id_grupo', $grupos_id_grupo);
-            // $sentencia->bindParam(':grupos', $group);
 
             $sentencia->execute();
         }
