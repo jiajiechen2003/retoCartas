@@ -61,11 +61,7 @@ $cardsGroups = selectCardsGroups();
                         <h3>
                             <?php echo $card['poder'] ?>
                         </h3>
-                        <img src="<?php foreach ($attributeImage as $image) {
-                                        echo $image['imagen'];
-                                    } ?>" id="<?php foreach ($attribute as $value) {
-                                        echo $value['atributo'];
-                                    } ?>">
+                        <img src="<?php echo $attributeImage['imagen']; ?>" id="<?php echo $attribute['atributo'] ?>">
                     </div>
                 </div>
                 <div class="card-img">
@@ -74,9 +70,7 @@ $cardsGroups = selectCardsGroups();
                 <div class="card-text">
                     <div class="card-type">
                         <h4>
-                            <?php foreach ($type as $tipo) {
-                                echo $tipo['tipo'];
-                            } ?>
+                            <?php echo $type['tipo'] ?>
                         </h4>
                     </div>
                     <div class="card-crew">
@@ -119,11 +113,7 @@ $cardsGroups = selectCardsGroups();
                                     <h3>
                                         <?php echo $card['poder'] ?>
                                     </h3>
-                                    <img src="<?php foreach ($attributeImage as $image) {
-                                                    echo $image['imagen'];
-                                                } ?>" id="<?php foreach ($attribute as $value) {
-                                                    echo $value['atributo'];
-                                                } ?>">
+                                    <img src="<?php echo $attributeImage['imagen']; ?>" id="<?php echo $attribute['atributo'] ?>">
                                 </div>
                             </div>
                             <div class="card-img">
@@ -132,9 +122,7 @@ $cardsGroups = selectCardsGroups();
                             <div class="card-text">
                                 <div class="card-type">
                                     <h4>
-                                        <?php foreach ($type as $tipo) {
-                                            echo $tipo['tipo'];
-                                        } ?>
+                                        <?php echo $type['tipo']; ?>
                                     </h4>
                                 </div>
                                 <div class="card-crew">

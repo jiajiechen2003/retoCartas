@@ -395,3 +395,12 @@ option {
 #modifyForm label {
     margin-left: 3px;
 }
+
+.alert {
+    text-align: center;
+    align-items: center;
+}
+
+.alert h2 {
+    font-size: 20px;
+}

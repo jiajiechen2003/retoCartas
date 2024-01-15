@@ -102,9 +102,9 @@ function selectAttribute($id_carta)
 
     $resultado = $sentencia->fetchAll();
 
-    $conn = closeDB();
+    $conn = closeDB(PDO::FETCH_ASSOC);
 
-    return $resultado;
+    return $resultado[0];
 }
 
 function selectAttributeImage($id_carta)
@@ -119,9 +119,9 @@ function selectAttributeImage($id_carta)
 
     $resultado = $sentencia->fetchAll();
 
-    $conn = closeDB();
+    $conn = closeDB(PDO::FETCH_ASSOC);
 
-    return $resultado;
+    return $resultado[0];
 }
 
 function selectType($id_carta)
@@ -135,9 +135,23 @@ function selectType($id_carta)
 
     $resultado = $sentencia->fetchAll();
 
-    $conn = closeDB();
+    $conn = closeDB(PDO::FETCH_ASSOC);
 
-    return $resultado;
+    return $resultado[0];
+}
+
+function imgRoute($id_carta) {
+    $conn = openDBCards();
+
+    $select = "SELECT imagen FROM cartas WHERE id_carta = '$id_carta'";
+    $sentencia = $conn->prepare($select);
+    $sentencia->execute();
+
+    $resultado = $sentencia->fetchAll();
+
+    $conn = closeDB(PDO::FETCH_ASSOC);
+
+    return $resultado['imagen'];
 }
 
 function selectCardsGroups()
