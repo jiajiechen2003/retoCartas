@@ -374,9 +374,10 @@ header {
     margin: 0 auto;
     border-radius: 20px;
 }
+
 .form-container h1 {
     margin-top: 10px;
-    font-family: monaco,Consolas,Lucida Console,monospace; 
+    font-family: monaco, Consolas, Lucida Console, monospace;
 }
 
 option {
@@ -403,4 +404,8 @@ option {
 
 .alert h2 {
     font-size: 20px;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
